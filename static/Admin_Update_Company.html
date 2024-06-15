@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Update Company List -Placement Cell</title>
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f0f0f0;
+        padding-top: 20px;
+    }
+    .container {
+        margin-top: 20px;
+    }
+    .page-title {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+    .table {
+        margin-bottom: 30px;
+    }
+    .btn-group {
+        margin-top: 20px;
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h2 class="page-title">Update Company List</h2>
+    
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Company Name</th>
+                <th scope="col">Industry</th>
+                <th scope="col">Location</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for company in companies %}
+            <tr>
+                <td>{{ company[0] }}</td>
+                <td>{{ company[1] }}</td>
+                <td>{{ company[2] }}</td>
+                <td>
+                    <form method="post" action="/update_company">
+                        <input type="hidden" name="company_id" value="{{ company[3] }}">
+                        <input type="hidden" name="action" value="update">
+                        <button type="submit" class="btn btn-primary">Update</button>
+                    </form>
+                    <form method="post" action="/update_company">
+                        <input type="hidden" name="company_id" value="{{ company[3] }}">
+                        <input type="hidden" name="action" value="delete">
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+    <!-- Add New Company Form -->
+    <h2>Add New Company</h2>
+    <form method="post" action="/update_company">
+        <div class="form-group">
+            <label for="company_name">Company Name:</label>
+            <input type="text" class="form-control" id="company_name" name="company_name" required>
+        </div>
+        <div class="form-group">
+            <label for="industry">Industry:</label>
+            <input type="text" class="form-control" id="industry" name="industry" required>
+        </div>
+        <div class="form-group">
+            <label for="location">Location:</label>
+            <input type="text" class="form-control" id="location" name="location" required>
+        </div>
+        <input type="hidden" name="action" value="add">
+        <button type="submit" class="btn btn-success">Add</button>
+    </form>
+    
+    <a href="Admin_Home.html" class="btn btn-secondary">Back to Home</a>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Applied Jobs - Placement Cell</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+       body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-image: url('../static/photo.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed; /* Fixed background */
+    position: relative; /* Needed for z-index */
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('../static/photo.jpg');
+    background-size: cover;
+    background-position: center;
+    filter: blur(5px); /* Apply the blur effect */
+    z-index: -1; /* Behind other content */
+}
+
+.container {
+    width: 100%;
+    max-width: 1000px;
+    margin: 50px auto;
+    background-color: rgba(255, 255, 255, 0.7); /* Semi-transparent white background */
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);
+    padding: 40px;
+    box-sizing: border-box; 
+}
+        .page-title {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #000000; /* White text color */
+        }
+        .table {
+            margin-bottom: 30px;
+        }
+        .btn-home {
+            margin-top: 20px;
+            background-color: #584974;
+        }
+        .custom-thead {
+    background-color: #584974; /* Change to your desired color */
+    color: #ffffff; /* Optional: Change text color for better contrast */
+}
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2 class="page-title">Applied Jobs</h2>
+    
+    <table class="table">
+        <thead class="custom-thead">
+            <tr>
+                <th scope="col">Sr.No</th>
+                <th scope="col">Company Name</th>
+                <th scope="col">Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for idx, company_name in applied_companies %}
+            <tr>
+                <td>{{ idx + 1 }}</td>
+                <td>{{ company_name }}</td>
+                <td>Applied</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+    <a href="{{ url_for('student_dashboard') }}" class="btn btn-secondary btn-home">Back to Home</a>
+</div>
+
+</body>
+</html>

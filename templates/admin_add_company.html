@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Company - Placement Cell</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+         body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-image: url('../static/photo.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed; /* Fixed background */
+    position: relative; /* Needed for z-index */
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('../static/photo.jpg');
+    background-size: cover;
+    background-position: center;
+    filter: blur(5px); /* Apply the blur effect */
+    z-index: -1; /* Behind other content */
+}
+
+.container {
+    width: 100%;
+    max-width: 1000px;
+    margin: 50px auto;
+    background-color: rgba(255, 255, 255, 0.7); /* Semi-transparent white background */
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);
+    padding: 40px;
+    box-sizing: border-box; 
+}
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            font-weight: bold;
+        }
+        input[type="text"],
+        input[type="date"],
+        input[type="file"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        button[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            background-color: #584974;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button[type="submit"]:hover {
+            background-color: #584974;
+        }
+        .text-danger {
+            color: #dc3545; /* Red color for error messages */
+            display: none; /* Initially hidden */
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Add Company</h1>
+        <form action="{{ url_for('admin_add_company') }}" method="post" enctype="multipart/form-data" id="companyForm">
+            <div class="form-group">
+                <label for="company_name">Company Name</label>
+                <input type="text" class="form-control" id="company_name" name="company_name" required>
+            </div>
+            <div class="form-group">
+                <label for="industry">Industry</label>
+                <input type="text" class="form-control" id="industry" name="industry" required>
+            </div>
+            <div class="form-group">
+                <label for="location">Job Location</label>
+                <input type="text" class="form-control" id="location" name="location" required>
+            </div>
+            <div class="form-group">
+                <label for="date">Date</label>
+                <input type="date" class="form-control" id="date" name="date" required>
+                <small id="dateError" class="text-danger">Please select a date in the present or future.</small>
+            </div>
+            <div class="form-group">
+                <label for="venue">Venue</label>
+                <input type="text" class="form-control" id="venue" name="venue" required>
+            </div>
+            <div class="form-group">
+                <label for="deadline">Deadline</label>
+                <input type="text" class="form-control" id="deadline" name="deadline" placeholder="YYYY-MM-DD" required>
+                <small id="deadlineError" class="text-danger">Please enter the deadline in the format YYYY-MM-DD.</small>
+            </div>
+            <div class="form-group">
+                <label for="vacancies">Vacancies</label>
+                <input type="number" class="form-control" id="vacancies" name="vacancies" min="1" required>
+            </div>   
+            <div class="form-group">
+                <label for="salary">Salary</label>
+               
+                <input type="number" class="form-control" id="salary" name="salary" min="0" required>
+
+            </div>
+            <div class="form-group">
+                <label for="role">Role</label>
+                <input type="text" class="form-control" id="role" name="role" required>
+            </div>
+            <div class="form-group">
+                <label for="company_detail_pdf">Company Detail PDF</label>
+                <input type="file" class="form-control-file" id="company_detail_pdf" name="company_detail_pdf" accept=".pdf" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Add Company</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById("companyForm").addEventListener("submit", function(event) {
+            // Get the input date value
+            var dateInput = document.getElementById("date").value.trim();
+            
+            // Validate the input date
+            var isValidDate = isDateInPresentOrFuture(dateInput);
+            
+            if (!isValidDate) {
+                // Show error message and prevent form submission
+                document.getElementById("dateError").style.display = "block";
+                event.preventDefault(); // Prevent form submission
+            }
+        });
+
+        function isDateInPresentOrFuture(dateStr) {
+            // Split the date string into parts (assuming format YYYY-MM-DD)
+            const [year, month, day] = dateStr.split("-").map(Number);
+            
+            // Create a Date object for the input date
+            const inputDate = new Date(year, month - 1, day); // Month is 0-based in Date object
+            
+            // Get the current date
+            const currentDate = new Date();
+            
+            // Compare input date with current date
+            if (inputDate >= currentDate) {
+                return true; // Date is in present or future
+            } else {
+                return false; // Date is in the past
+            }
+        }
+    </script>
+</body>
+</html>

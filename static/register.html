@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - Placement Cell</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url('../static/photo.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('../static/photo.jpg');
+            background-size: cover;
+            background-position: center;
+            filter: blur(5px);
+            z-index: -1;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 600px;
+            margin: 100px auto;
+            background-color: rgba(255, 255, 255, 0.7);
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            box-sizing: border-box;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333333;
+        }
+
+        input[type="text"],
+        input[type="password"],
+        input[type="date"],
+        input[type="file"],
+        select,
+        input[type="submit"] {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: none;
+            border-radius: 8px;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"] {
+            background-color: #545a61;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+    </style>
+    <script>
+        function validateForm() {
+            var contact = document.getElementById('contact').value;
+            var email = document.getElementById('email').value;
+            var cgpa = document.getElementById('cgpa').value;
+
+            // Mobile number validation (10 digits)
+            if (!/^\d{10}$/.test(contact)) {
+                alert("Please enter a valid 10-digit mobile number.");
+                return false;
+            }
+
+            // Email validation
+            if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
+                alert("Please enter a valid email address.");
+                return false;
+            }
+
+            // CGPA validation (numeric)
+            if (isNaN(cgpa)) {
+                alert("CGPA must be a numeric value.");
+                return false;
+            }
+
+            return true;
+        }
+    </script>
+</head>
+<body>
+
+<div class="container">
+    <h1>Register as Student</h1>
+    <form action="/register" method="post" id="registerForm" onsubmit="return validateForm()" enctype="multipart/form-data">
+        <input type="text" name="username" placeholder="Username" required><br>
+        <input type="text" name="name" placeholder="Full Name" required><br>
+        <input type="text" name="prn" placeholder="PRN" required><br>
+        <input type="text" id="email" name="email" placeholder="Email" required><br>
+        <input type="password" name="password" placeholder="Password" required><br>
+        <select name="country_code" required>
+            <option value="" disabled selected>Select Country Code</option>
+            <option value="+1">United States (+1)</option>
+            <option value="+44">United Kingdom (+44)</option>
+            <option value="+1">Canada (+1)</option>
+            <option value="+61">Australia (+61)</option>
+            <option value="+49">Germany (+49)</option>
+            <option value="+33">France (+33)</option>
+            <option value="+81">Japan (+81)</option>
+            <option value="+86">China (+86)</option>
+            <option value="+91">India (+91)</option>
+            <option value="+55">Brazil (+55)</option>
+            <option value="+7">Russia (+7)</option>
+            <option value="+27">South Africa (+27)</option>
+            <option value="+52">Mexico (+52)</option>
+            <option value="+39">Italy (+39)</option>
+            <option value="+34">Spain (+34)</option>
+        </select>
+        <input type="text" name="contact" placeholder="Mobile Number" required><br>
+        <select name="department" required>
+            <option value="" disabled selected>Select Department</option>
+            <option value="MCA">MCA</option>
+            <option value="MCS">MCS</option>
+            <option value="Computer Engineering">Computer Engineering</option>
+            <option value="IT Engineering">IT Engineering</option>
+            <option value="AI and ML Engineering">AI and ML Engineering</option>
+            <option value="BCA">BCA</option>
+            <option value="BCS">BCS</option>
+        </select><br>
+        <select name="academic_year">
+            <option value="" disabled selected>Select Academic Year</option>
+            <option value="2018-19">2018-19</option>
+            <option value="2019-20">2019-20</option>
+            <option value="2020-21">2020-21</option>
+            <option value="2021-22">2021-22</option>
+            <option value="2022-23">2022-23</option>
+            <option value="2023-24">2023-24</option>
+            <option value="2024-25">2024-25</option>
+            <option value="2025-26">2025-26</option>
+            <option value="2026-27">2026-27</option>
+        </select><br>
+        <input type="date" name="birthdate" placeholder="Birthdate" required><br>
+        <select name="gender" required>
+            <option value="" disabled selected>Select Gender</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+        </select><br>
+        <input type="text" name="course" placeholder="University" required><br>
+        <input type="text" name="address" placeholder="Address" required><br>
+        <input type="text" id="cgpa" name="cgpa" placeholder="CGPA" required><br>
+        <select name="interest">
+            <option value="" disabled selected>Select Interest</option>
+            <option value="Development">Development</option>
+            <option value="Testing">Testing</option>
+            <option value="SalesForce">SalesForce</option>
+            <option value="Data Analytics">Data Analytics</option>
+            <option value="Cloud">Cloud</option>
+        </select><br>
+        <label for="resume">Resume</label>
+        <input type="file" name="resume" accept=".pdf" required><br>
+        <input type="submit" value="Register">
+    </form>    
+</div>
+
+</body>
+</html>

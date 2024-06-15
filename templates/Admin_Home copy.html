@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Dashboard - PLACEMENT CELL</title>
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f0f0f0;
+        padding-top: 20px;
+        position: relative;
+    }
+    body::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-image: url('../static/photo.jpg');
+        background-size: cover;
+        background-position: center;
+        filter: blur(2px); /* Apply the blur effect */
+        z-index: -1; /* Behind other content */
+    }
+    .container {
+        margin-top: 20px;
+        position: relative; /* Needed for z-index */
+        z-index: 1; /* Above the background blur */
+        color: white; /* Set font color to white */
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9); /* Add text shadow for pop effect */
+        
+    }
+    .logo img {
+        width: 60px; /* Reduced logo size */
+        margin-bottom: 35px;
+    }
+    .signout {
+        color: rgb(255, 252, 252); /* Change font color to black */
+        background-color: #584974; /* Set background color to black */
+    }
+    .Admin-info {
+        margin-bottom: 100px; /* Increased margin-bottom */
+        margin-top: 40px;
+    }
+    .Admin-info p {
+        color: white; /* Set font color to white */
+    }
+    
+    .dashboard-buttons button.signout-btn {
+        background-color: #584974; /* Matching color for the buttons */
+        color: #fff;
+    }
+    .dashboard-buttons button:not(.signout-btn) {
+        background-color: #584974; /* Matching color for the buttons */
+        color: #fff;
+    }
+    .btn-email {
+            
+            background-color: #584974;
+            padding: 10px 15px; /* Optional: Adjust padding for better appearance */
+            border-radius: 5px;
+        }
+     /* Change the background color of the navigation links */
+.navbar-dark .navbar-nav .nav-link {
+    background-color: #584974; /* Change the background color */
+    padding: 10px 15px; /* Optional: Adjust padding for better appearance */
+    border-radius: 5px; /* Optional: Add border-radius for rounded corners */
+}
+
+/* Change the background color of the navigation links on hover */
+.navbar-dark .navbar-nav .nav-link:hover {
+    background-color: #757373; /* Change the background color on hover */
+}
+.college-info {
+    font-size: 24px; /* Set the font size to 24px */
+    font-weight: bold; /* Set the font weight to bold */
+}
+
+</style>
+</head>
+<body>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="logo d-flex align-items-center">
+                <img src="{{ url_for('static', filename='college_logo.png') }}" alt="College Logo" class="mr-2">
+                <div class="college-info">Sir Parshurambhau College (Established in 1916) (Autonomous)</div>
+            </div>
+        </div>
+        <div class="col-md-6 text-right">
+            <a href="{{ url_for('logout') }}" class="btn btn-outline-dark signout">Sign Out</a> <!-- Black color for signout button -->
+        </div>
+    </div>
+    
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+        <div class="container">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('admin_dashboard') }}">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('admin_about_page') }}">About</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('admin_update_company') }}">Company List</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('admin_add_company') }}">Add Company</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('student_list') }}">Student List</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('admin_contact_us_page') }}">Contact Us</a></li>
+                <li class="nav-item"><form action="{{ url_for('send_email') }}" method="post">
+                    <button type="submit" class="btn btn-secondary btn-email">Send Email</button>
+                </form></a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="Admin-info">
+        <p><strong>Name:</strong> {{ current_user.username }}</p>
+        <p><strong>Email:</strong> {{ current_user.username }}@example.com</p>
+    </div>
+   <!-- 
+    <div class="dashboard-buttons">
+        <a href="{{ url_for('student_list') }}" class="btn btn-primary">Student Database</a> 
+        <a href="{{ url_for('admin_add_company') }}" class="btn btn-primary">Update Company List</a> 
+    </div>
+    -->
+</div>
+
+</body>
+</html>

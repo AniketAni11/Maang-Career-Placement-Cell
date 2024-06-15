@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Company Schedules - Placement Cell</title>
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f0f0f0;
+        padding-top: 20px;
+    }
+    .container {
+        margin-top: 20px;
+    }
+    .page-title {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+    .table {
+        margin-bottom: 30px;
+    }
+    .btn-home {
+        margin-top: 20px;
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h2 class="page-title">Company Schedules</h2>
+    
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Company Name</th>
+                <th scope="col">Date</th>
+                <th scope="col">Time</th>
+                <th scope="col">Venue</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- PHP loop to fetch and display schedule data -->
+            <?php
+                // Replace this with your PHP code to fetch schedule data from the database
+                // Example data for demonstration:
+                $schedules = array(
+                    array("Company A", "2024-02-25", "10:00 AM", "Auditorium"),
+                    array("Company B", "2024-03-02", "2:00 PM", "Conference Room"),
+                    array("Company C", "2024-03-08", "11:30 AM", "Seminar Hall")
+                );
+
+                foreach ($schedules as $schedule) {
+                    echo "<tr>";
+                    echo "<td>{$schedule[0]}</td>";
+                    echo "<td>{$schedule[1]}</td>";
+                    echo "<td>{$schedule[2]}</td>";
+                    echo "<td>{$schedule[3]}</td>";
+                    echo "</tr>";
+                }
+            ?>
+        </tbody>
+    </table>
+    
+    <a href="Admin_Home.html" class="btn btn-secondary btn-home">Back to Home</a>
+</div>
+
+</body>
+</html>
